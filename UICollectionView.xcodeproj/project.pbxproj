@@ -13,6 +13,7 @@
 		C1012C221D22034500F4F211 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1012C201D22034500F4F211 /* LaunchScreen.storyboard */; };
 		C1012C2B1D22060700F4F211 /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1012C2A1D22060700F4F211 /* PhotoCollectionViewController.swift */; };
 		C1012C2E1D220A6200F4F211 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1012C2D1D220A6200F4F211 /* PhotoCollectionViewCell.swift */; };
+		C1440C971D29ED4800BF944D /* PhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1440C961D29ED4800BF944D /* PhotoHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		C1012C231D22034500F4F211 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1012C2A1D22060700F4F211 /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
 		C1012C2D1D220A6200F4F211 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		C1440C961D29ED4800BF944D /* PhotoHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				C1012C2D1D220A6200F4F211 /* PhotoCollectionViewCell.swift */,
+				C1440C961D29ED4800BF944D /* PhotoHeaderView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			files = (
 				C1012C2B1D22060700F4F211 /* PhotoCollectionViewController.swift in Sources */,
 				C1012C181D22034500F4F211 /* AppDelegate.swift in Sources */,
+				C1440C971D29ED4800BF944D /* PhotoHeaderView.swift in Sources */,
 				C1012C2E1D220A6200F4F211 /* PhotoCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +311,7 @@
 				C1012C281D22034500F4F211 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

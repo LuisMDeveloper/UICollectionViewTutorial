@@ -9,11 +9,12 @@
 import UIKit
 
 private let reuseIdentifier = "PhotoCell"
+private let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
 
 class PhotoCollectionViewController: UICollectionViewController {
     
-    public var imagesDataSource: [UIImage] = []
-
+    public var imagesDataSource: [[UIImage]] = []
+    public var sections: [String] = ["Business", "Sports"]
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,12 +25,23 @@ class PhotoCollectionViewController: UICollectionViewController {
         //self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
-        collectionView!.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        //collectionView!.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
-        for _ in 1...17 {
-            imagesDataSource
-                .append(NSURL(string: "http://lorempixel.com/110/110/").flatMap { NSData(contentsOfURL: $0) }.flatMap { UIImage(data: $0) }!)
+        var business: [UIImage] = []
+        var sports: [UIImage] = []
+        
+        for _ in 1...9 {
+            business
+                .append(NSURL(string: "http://lorempixel.com/110/110/business/").flatMap { NSData(contentsOfURL: $0) }.flatMap { UIImage(data: $0) }!)
         }
+        
+        for _ in 1...9 {
+            sports
+                .append(NSURL(string: "http://lorempixel.com/110/110/sports/").flatMap { NSData(contentsOfURL: $0) }.flatMap { UIImage(data: $0) }!)
+        }
+        
+        imagesDataSource.append(business)
+        imagesDataSource.append(sports)
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,13 +63,13 @@ class PhotoCollectionViewController: UICollectionViewController {
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return imagesDataSource.count
     }
 
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return imagesDataSource.count
+        return imagesDataSource[section].count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -65,11 +77,22 @@ class PhotoCollectionViewController: UICollectionViewController {
     
         // Configure the cell
         cell.backgroundColor = UIColor.blueColor()
-        cell.photo.image = imagesDataSource[indexPath.row]
+        cell.photo.image = imagesDataSource[indexPath.section][indexPath.row]
         
         return cell
     }
 
+    
+    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionElementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "PhotoHeaderView", forIndexPath: indexPath) as! PhotoHeaderView
+            headerView.label.text = sections[indexPath.section]
+            return headerView
+        default:
+            assert(false, "Unexpected element kind")
+        }
+    }
     // MARK: UICollectionViewDelegate
 
     /*
@@ -101,4 +124,10 @@ class PhotoCollectionViewController: UICollectionViewController {
     }
     */
 
+}
+
+extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
 }
