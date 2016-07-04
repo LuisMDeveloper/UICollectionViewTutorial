@@ -11,6 +11,8 @@ import UIKit
 private let reuseIdentifier = "PhotoCell"
 
 class PhotoCollectionViewController: UICollectionViewController {
+    
+    public var imagesDataSource: [UIImage] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,11 @@ class PhotoCollectionViewController: UICollectionViewController {
 
         // Do any additional setup after loading the view.
         collectionView!.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        
+        for _ in 1...17 {
+            imagesDataSource
+                .append(NSURL(string: "http://lorempixel.com/110/110/").flatMap { NSData(contentsOfURL: $0) }.flatMap { UIImage(data: $0) }!)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,7 +57,7 @@ class PhotoCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 10
+        return imagesDataSource.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -58,7 +65,7 @@ class PhotoCollectionViewController: UICollectionViewController {
     
         // Configure the cell
         cell.backgroundColor = UIColor.blueColor()
-        cell.photo.image = NSURL(string: "http://lorempixel.com/110/110/").flatMap { NSData(contentsOfURL: $0) }.flatMap { UIImage(data: $0) }!
+        cell.photo.image = imagesDataSource[indexPath.row]
         
         return cell
     }
